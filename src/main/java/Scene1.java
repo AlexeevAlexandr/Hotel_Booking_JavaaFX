@@ -17,9 +17,8 @@ class Scene1 {
     void scene1(Stage stage) {
         stage.setTitle("Hotel Booking");
         VBox rood = new VBox();
-        rood.setAlignment(Pos.CENTER);
         rood.setSpacing(10);
-        Label label = new Label("Scene 2");
+        Label label = new Label("Scene 1");
         Scene scene1 = new Scene(rood, 800, 600);
 
         //reading from file
@@ -40,16 +39,24 @@ class Scene1 {
         //set buttons switcher scenes
         HBox buttonsScene = new HBox();
         Button buttonScene = new Button("To scene 2");
-        buttonsScene.setAlignment(Pos.TOP_LEFT);
         buttonsScene.getChildren().addAll(buttonScene);
 
+        //set separators lines
+        Separator separator1 = new Separator();
+        separator1.setMaxWidth(500);
+        Separator separator2 = new Separator();
+        separator2.setMaxWidth(500);
+
         //set text fields
+        VBox roodText = new VBox();
+        roodText.setAlignment(Pos.CENTER);
         TextField fieldName = new TextField();
         fieldName.setMaxWidth(500);
         fieldName.setPromptText("Enter name");
         TextField fieldEmail = new TextField();
         fieldEmail.setMaxWidth(500);
         fieldEmail.setPromptText("Enter email");
+        roodText.getChildren().addAll(label, list, fieldName, fieldEmail, separator1);
 
         //set date fields
         HBox hBox = new HBox();
@@ -77,13 +84,7 @@ class Scene1 {
         radioButtons.setSpacing(50);
         radioButtons.setAlignment(Pos.CENTER);
 
-        //set separators lines
-        Separator separator1 = new Separator();
-        separator1.setMaxWidth(500);
-        Separator separator2 = new Separator();
-        separator2.setMaxWidth(500);
-
-        rood.getChildren().addAll(buttonsScene, label, list, separator1, fieldName, fieldEmail, hBox, radioButtons, separator2, buttons);
+        rood.getChildren().addAll(buttonsScene, roodText, hBox, radioButtons, separator2, buttons);
         stage.setScene(scene1);
         stage.show();
 
