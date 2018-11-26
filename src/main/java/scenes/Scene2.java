@@ -40,7 +40,7 @@ class Scene2 {
         fieldEmail.setPromptText("Enter email");
         textFields.getChildren().addAll(label, fieldName, fieldEmail);
 
-        buttonScene.setOnAction(e -> new Scene1().scene1(stage));
+        buttonScene.setOnAction(e -> new Scene1().scene1(stage));//switch to scene1
 
         root.getChildren().addAll(buttonsScene, textFields);
         stage.setScene(scene2);

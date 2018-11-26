@@ -8,9 +8,13 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 class Scene1 {
@@ -51,6 +55,7 @@ class Scene1 {
 
         //set text fields
         VBox textFields = new VBox();
+        textFields.setSpacing(10);
         textFields.setAlignment(Pos.CENTER);
         TextField fieldName = new TextField();
         fieldName.setMaxWidth(500);
@@ -92,14 +97,36 @@ class Scene1 {
 
         //event handling
         buttonScene.setOnAction(e -> new Scene2().scene2(stage));//switch to scene2
-        fieldDataClearing(buttonClear,fieldEmail, fieldName, datePicker1, datePicker2, radioBreakfast, radioClear);//field data clearing
+        fieldDataClearing(buttonClear, fieldEmail, fieldName, datePicker1, datePicker2, radioBreakfast, radioClear);//field data clearing
+        writeDataToListOrders(buttonSet, fieldName, fieldEmail, datePicker1, datePicker2, radioBreakfast, radioClear);//field data setting
     }
 
-    private void fieldDataClearing(
-            Button buttonClear, TextField fieldEmail, TextField fieldName,
-            DatePicker datePicker1, DatePicker datePicker2,
-            RadioButton radioBreakfast, RadioButton radioClear)
-    {
+    private void writeDataToListOrders(Button buttonSet, TextField fieldName, TextField fieldEmail, DatePicker datePicker1, DatePicker datePicker2, RadioButton radioBreakfast, RadioButton radioClear) {
+        ArrayList<String> arrayList = new ArrayList<>();
+        buttonSet.setOnAction(a -> {
+            arrayList.add("Name = " + fieldName.getText() + "; ");
+            arrayList.add("Email = " + fieldEmail.getText() + "; ");
+            arrayList.add("Date from = " + datePicker1.getValue() + "; ");
+            arrayList.add("Date Till = " + datePicker2.getValue() + "; ");
+            arrayList.add("Breakfast = " + (radioBreakfast.isSelected()? "YES" : "NO") + "; ");
+            arrayList.add("Clear = " + (radioClear.isSelected() ? "YES" : "NO") + "; ");
+            arrayList.add("Date registration = " + (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())));
+            try (FileWriter writer = new FileWriter("src/main/resources/listOrders.txt", true)) {
+                for (String o : arrayList) {
+                    writer.write(o);
+                }
+                writer.write("\n");
+                writer.flush();
+                arrayList.clear();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+
+    }
+
+    private void fieldDataClearing(Button buttonClear, TextField fieldEmail, TextField fieldName, DatePicker datePicker1, DatePicker datePicker2, RadioButton radioBreakfast, RadioButton radioClear) {
         buttonClear.setOnAction(e ->
         {
             fieldEmail.clear();
