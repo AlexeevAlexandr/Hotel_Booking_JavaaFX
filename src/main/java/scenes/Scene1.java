@@ -25,15 +25,17 @@ class Scene1 {
 
         //reading from file
         ArrayList<String> arrayList = new ArrayList<>();
-        try (Scanner scanner = new Scanner(new FileReader("src/main/resources/list.txt"))){
+        try (Scanner scanner = new Scanner(new FileReader("src/main/resources/list.txt"))) {
             while (scanner.hasNext()) {
                 arrayList.add(scanner.nextLine());
             }
-        }catch (IOException e){e.printStackTrace();}
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         //view on window
         ListView<String> list = new ListView<>();
-        ObservableList<String> items = FXCollections.observableArrayList (arrayList);
+        ObservableList<String> items = FXCollections.observableArrayList(arrayList);
         list.setItems(items);
         list.setMaxWidth(500);
         list.setMaxHeight(200);
@@ -75,14 +77,14 @@ class Scene1 {
         buttons.setAlignment(Pos.CENTER);
         buttons.setSpacing(20);
         Button button1 = new Button("set");
-        Button button2 = new Button("clear");
-        buttons.getChildren().addAll(button1, button2);
+        Button buttonClear = new Button("clear");
+        buttons.getChildren().addAll(button1, buttonClear);
 
         //set radio buttons
-        RadioButton radioSweep = new RadioButton("Add clearing 1$");
-        RadioButton radioSin = new RadioButton("Add breakfast 2$");
+        RadioButton radioClear = new RadioButton("Add clearing 1$");
+        RadioButton radioBreakfasr = new RadioButton("Add breakfast 2$");
         HBox radioButtons = new HBox();
-        radioButtons.getChildren().addAll(radioSweep, radioSin);
+        radioButtons.getChildren().addAll(radioClear, radioBreakfasr);
         radioButtons.setSpacing(50);
         radioButtons.setAlignment(Pos.CENTER);
 
@@ -90,6 +92,17 @@ class Scene1 {
         stage.setScene(scene1);
         stage.show();
 
-        buttonScene.setOnAction(e -> new Scene2().scene2(stage));
+        //event handling
+        buttonScene.setOnAction(e -> new Scene2().scene2(stage));//switch to scene2
+        fieldDataClearing(buttonClear,fieldEmail, fieldName);//field data clearing
+
+    }
+
+    private void fieldDataClearing(Button buttonClear, TextField fieldEmail, TextField fieldName){
+        buttonClear.setOnAction(e -> {
+            fieldEmail.clear();
+            fieldName.clear();
+        });
+
     }
 }
