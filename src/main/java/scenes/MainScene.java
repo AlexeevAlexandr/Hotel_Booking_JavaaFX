@@ -1,7 +1,9 @@
+package scenes;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-public class MyScene extends Application {
+public class MainScene extends Application {
 
     @Override
     public void start(Stage stage) {
