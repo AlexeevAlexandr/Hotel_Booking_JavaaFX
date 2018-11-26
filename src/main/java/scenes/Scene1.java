@@ -94,14 +94,22 @@ class Scene1 {
 
         //event handling
         buttonScene.setOnAction(e -> new Scene2().scene2(stage));//switch to scene2
-        fieldDataClearing(buttonClear,fieldEmail, fieldName);//field data clearing
-
+        fieldDataClearing(buttonClear,fieldEmail, fieldName, datePicker1, datePicker2, radioBreakfasr, radioClear);//field data clearing
     }
 
-    private void fieldDataClearing(Button buttonClear, TextField fieldEmail, TextField fieldName){
-        buttonClear.setOnAction(e -> {
+    private void fieldDataClearing(
+            Button buttonClear, TextField fieldEmail, TextField fieldName,
+            DatePicker datePicker1, DatePicker datePicker2,
+            RadioButton radioBreakfasr, RadioButton radioClear)
+    {
+        buttonClear.setOnAction(e ->
+        {
             fieldEmail.clear();
             fieldName.clear();
+            datePicker1.getEditor().clear();
+            datePicker2.getEditor().clear();
+            radioClear.setSelected(false);
+            radioBreakfasr.setSelected(false);
         });
 
     }
