@@ -9,7 +9,10 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
 class Scene2 {
+        private ArrayList<String> list = new ArrayList<>();
 
     void scene2(Stage stage) {
         VBox root = new VBox();
@@ -32,17 +35,37 @@ class Scene2 {
         VBox textFields = new VBox();
         textFields.setSpacing(10);
         textFields.setAlignment(Pos.CENTER);
+        Label fildNameLabel = new Label("Name");
         TextField fieldName = new TextField();
         fieldName.setMaxWidth(500);
-        fieldName.setPromptText("Enter name");
+        fieldName.setText(list.get(0));
         TextField fieldEmail = new TextField();
         fieldEmail.setMaxWidth(500);
-        fieldEmail.setPromptText("Enter email");
-        textFields.getChildren().addAll(label, fieldName, fieldEmail);
+        fieldEmail.setText(list.get(1));
+        TextField fieldDateFrom = new TextField();
+        fieldDateFrom.setMaxWidth(500);
+        fieldDateFrom.setText(list.get(2));
+        TextField fieldDateTill = new TextField();
+        fieldDateTill.setMaxWidth(500);
+        fieldDateTill.setText(list.get(3));
+        TextField fieldBreakfast = new TextField();
+        fieldBreakfast.setMaxWidth(500);
+        fieldBreakfast.setText(list.get(4));
+        TextField fieldClear = new TextField();
+        fieldClear.setMaxWidth(500);
+        fieldClear.setText(list.get(5));
+        TextField fieldDateRegistration = new TextField();
+        fieldDateRegistration.setMaxWidth(500);
+        fieldDateRegistration.setText(list.get(6));
+        textFields.getChildren().addAll(label, fildNameLabel, fieldName, fieldEmail, fieldDateFrom, fieldDateTill, fieldBreakfast, fieldClear, fieldDateRegistration);
 
         buttonScene.setOnAction(e -> new Scene1().scene1(stage));//switch to scene1
 
         root.getChildren().addAll(buttonsScene, textFields);
         stage.setScene(scene2);
+    }
+
+    void setData(ArrayList<String> arrayList) {
+        list = arrayList;
     }
 }
