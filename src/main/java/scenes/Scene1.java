@@ -121,7 +121,7 @@ class Scene1 {
         stage.show();
 
         //event handling
-        fieldDataClearing(buttonClear, list, fieldEmail, fieldName, datePicker1, datePicker2, radioBreakfast, radioClear);//field data clearing
+        fieldsDataClearing(buttonClear, list, fieldEmail, fieldName, datePicker1, datePicker2, radioBreakfast, radioClear);//field data clearing
         writeDataToListOrders(stage, list, buttonSet, fieldName, fieldEmail, datePicker1, datePicker2, radioBreakfast, radioClear);//field data setting
     }
 
@@ -178,7 +178,7 @@ class Scene1 {
         return (Integer.parseInt(cost[3].trim()) + (radioBreakfast.isSelected() ? costBreakfast : 0) + (radioClear.isSelected() ? costClearing : 0)) * diff;
     }
 
-    private void fieldDataClearing(Button buttonClear, ListView<String> list, TextField fieldEmail, TextField fieldName, DatePicker datePicker1, DatePicker datePicker2, RadioButton radioBreakfast, RadioButton radioClear) {
+    private void fieldsDataClearing(Button buttonClear, ListView<String> list, TextField fieldEmail, TextField fieldName, DatePicker datePicker1, DatePicker datePicker2, RadioButton radioBreakfast, RadioButton radioClear) {
         buttonClear.setOnAction(e ->
         {
             fieldEmail.clear();
