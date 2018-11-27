@@ -27,12 +27,14 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 class Scene1 {
+    private int costBreakfast = 2;
+    private int costClearing = 1;
     private Text textException = new Text("");
     void scene1(Stage stage) {
         stage.setTitle("Hotel Booking");
         VBox root = new VBox();
         root.setSpacing(10);
-        Label label = new Label("Scene 1");
+        Label label = new Label("Rooms list");
         Scene scene = new Scene(root, 800, 600);
 
         //set textException move animation
@@ -102,8 +104,8 @@ class Scene1 {
 
         //set radio buttons
         HBox radioButtons = new HBox();
-        RadioButton radioClear = new RadioButton("Add clearing 1$");
-        RadioButton radioBreakfast = new RadioButton("Add breakfast 2$");
+        RadioButton radioClear = new RadioButton("Add clearing " + costClearing + "$");
+        RadioButton radioBreakfast = new RadioButton("Add breakfast " + costBreakfast + "$");
         radioButtons.getChildren().addAll(radioClear, radioBreakfast);
         radioButtons.setSpacing(50);
         radioButtons.setAlignment(Pos.CENTER);
@@ -113,16 +115,17 @@ class Scene1 {
         stage.show();
 
         //event handling
-        fieldDataClearing(buttonClear, fieldEmail, fieldName, datePicker1, datePicker2, radioBreakfast, radioClear);//field data clearing
-        writeDataToListOrders(stage, buttonSet, fieldName, fieldEmail, datePicker1, datePicker2, radioBreakfast, radioClear);//field data setting
+        fieldDataClearing(buttonClear, list, fieldEmail, fieldName, datePicker1, datePicker2, radioBreakfast, radioClear);//field data clearing
+        writeDataToListOrders(stage, list, buttonSet, fieldName, fieldEmail, datePicker1, datePicker2, radioBreakfast, radioClear);//field data setting
     }
 
-    private void writeDataToListOrders(Stage stage, Button buttonSet, TextField fieldName, TextField fieldEmail, DatePicker datePicker1, DatePicker datePicker2, RadioButton radioBreakfast, RadioButton radioClear) {
+    private void writeDataToListOrders(Stage stage, ListView<String> list, Button buttonSet, TextField fieldName, TextField fieldEmail, DatePicker datePicker1, DatePicker datePicker2, RadioButton radioBreakfast, RadioButton radioClear) {
         ArrayList<String> arrayList = new ArrayList<>();
         String dateRegistration = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
         buttonSet.setOnAction(a -> {
             //check if data has been entered
-            if (fieldName.getText().length() == 0){ textException.setText("Enter name"); throw new IllegalArgumentException("Name not entered"); }
+            if (list.getSelectionModel().isEmpty()){ textException.setText("No number selected"); throw new IllegalArgumentException("No number selected"); }
+            else if (fieldName.getText().length() == 0){ textException.setText("Enter name"); throw new IllegalArgumentException("Name not entered"); }
             else if (fieldEmail.getText().length() == 0){ textException.setText("Enter email"); throw new IllegalArgumentException("Email not entered"); }
             else if (datePicker1.getValue() == null){ textException.setText("Enter arrival date"); throw new IllegalArgumentException("Arrival date not entered"); }
             else if (datePicker2.getValue() == null){ textException.setText("Enter departure date"); throw new IllegalArgumentException("Departure date not entered"); }
@@ -137,6 +140,7 @@ class Scene1 {
                     if (diff <= 0) {
                         textException.setText("Incorrect date insertion, the number of days can not be negative or 0"); throw new IllegalArgumentException("Incorrect date insertion, the number of days can not be negative or 0");
                     } else {
+                        arrayList.add("Room: " + list.getSelectionModel().getSelectedItem() + "; ");
                         arrayList.add("Name = " + fieldName.getText() + "; ");
                         arrayList.add("Email = " + fieldEmail.getText() + "; ");
                         arrayList.add("Arrival date = " + datePicker1.getValue() + "; ");
@@ -144,6 +148,7 @@ class Scene1 {
                         arrayList.add("Breakfast = " + (radioBreakfast.isSelected() ? "YES" : "NO") + "; ");
                         arrayList.add("Clear = " + (radioClear.isSelected() ? "YES" : "NO") + "; ");
                         arrayList.add("Registration Date  = " + dateRegistration);
+                        arrayList.add("Total cost  = " + getTotalCost(list.getSelectionModel().getSelectedItem(), radioBreakfast, radioClear, diff) + "$");
                     }
                     try (FileWriter writer = new FileWriter("src/main/resources/listOrders.txt", true)) {
                         for (String o : arrayList) {
@@ -162,7 +167,12 @@ class Scene1 {
             });
     }
 
-    private void fieldDataClearing(Button buttonClear, TextField fieldEmail, TextField fieldName, DatePicker datePicker1, DatePicker datePicker2, RadioButton radioBreakfast, RadioButton radioClear) {
+    private int getTotalCost(String list, RadioButton radioBreakfast, RadioButton radioClear, int diff) {
+        String[] cost = list.split("=");
+        return (Integer.parseInt(cost[3].trim()) + (radioBreakfast.isSelected() ? costBreakfast : 0) + (radioClear.isSelected() ? costClearing : 0)) * diff;
+    }
+
+    private void fieldDataClearing(Button buttonClear, ListView<String> list, TextField fieldEmail, TextField fieldName, DatePicker datePicker1, DatePicker datePicker2, RadioButton radioBreakfast, RadioButton radioClear) {
         buttonClear.setOnAction(e ->
         {
             fieldEmail.clear();
@@ -171,6 +181,7 @@ class Scene1 {
             datePicker2.getEditor().clear();
             radioClear.setSelected(false);
             radioBreakfast.setSelected(false);
+            list.getSelectionModel().clearSelection();
         });
 
     }

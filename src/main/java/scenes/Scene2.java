@@ -28,36 +28,41 @@ class Scene2 {
 
         //set buttons switcher scenes
         HBox buttonsScene = new HBox();
-        Button buttonScene = new Button("To scene 1");
+        Button buttonScene = new Button("To rooms list");
         buttonsScene.getChildren().addAll(buttonScene);
 
         //set text fields
         VBox textFields = new VBox();
         textFields.setSpacing(10);
         textFields.setAlignment(Pos.CENTER);
-        Label fildNameLabel = new Label("Name");
+        TextField fieldRoom = new TextField();
+        fieldRoom.setMaxWidth(500);
+        fieldRoom.setText(list.get(0));
         TextField fieldName = new TextField();
         fieldName.setMaxWidth(500);
-        fieldName.setText(list.get(0));
+        fieldName.setText(list.get(1));
         TextField fieldEmail = new TextField();
         fieldEmail.setMaxWidth(500);
-        fieldEmail.setText(list.get(1));
+        fieldEmail.setText(list.get(2));
         TextField fieldDateFrom = new TextField();
         fieldDateFrom.setMaxWidth(500);
-        fieldDateFrom.setText(list.get(2));
+        fieldDateFrom.setText(list.get(3));
         TextField fieldDateTill = new TextField();
         fieldDateTill.setMaxWidth(500);
-        fieldDateTill.setText(list.get(3));
+        fieldDateTill.setText(list.get(4));
         TextField fieldBreakfast = new TextField();
         fieldBreakfast.setMaxWidth(500);
-        fieldBreakfast.setText(list.get(4));
+        fieldBreakfast.setText(list.get(5));
         TextField fieldClear = new TextField();
         fieldClear.setMaxWidth(500);
-        fieldClear.setText(list.get(5));
+        fieldClear.setText(list.get(6));
         TextField fieldDateRegistration = new TextField();
         fieldDateRegistration.setMaxWidth(500);
-        fieldDateRegistration.setText(list.get(6));
-        textFields.getChildren().addAll(label, fildNameLabel, fieldName, fieldEmail, fieldDateFrom, fieldDateTill, fieldBreakfast, fieldClear, fieldDateRegistration);
+        fieldDateRegistration.setText(list.get(7));
+        TextField fieldTotalCost = new TextField();
+        fieldTotalCost.setMaxWidth(500);
+        fieldTotalCost.setText(list.get(8));
+        textFields.getChildren().addAll(label, fieldRoom, fieldName, fieldEmail, fieldDateFrom, fieldDateTill, fieldBreakfast, fieldClear, fieldDateRegistration, fieldTotalCost);
 
         buttonScene.setOnAction(e -> new Scene1().scene1(stage));//switch to scene1
 

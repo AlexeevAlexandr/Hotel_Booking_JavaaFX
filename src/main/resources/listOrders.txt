@@ -1,5 +1,7 @@
-Name = sda; Email = ascas; Arrival date = 2018-11-01; Departure date = 2018-11-02; Breakfast = NO; Clear = NO; Registration Date  = 2018-11-27 13:38:35
-Name = dcs; Email = csdcs; Arrival date = 2018-11-01; Departure date = 2018-11-02; Breakfast = NO; Clear = NO; Registration Date  = 2018-11-27 14:15:49
-Name = as; Email = as; Arrival date = 2018-11-01; Departure date = 2018-11-03; Breakfast = YES; Clear = YES; Registration Date  = 2018-11-27 14:16:12
-Name = zsc; Email = sczs; Arrival date = 2018-11-01; Departure date = 2018-11-02; Breakfast = NO; Clear = NO; Registration Date  = 2018-11-27 14:18:03
-Name = awd; Email = adawd; Arrival date = 2018-11-01; Departure date = 2018-11-02; Breakfast = NO; Clear = NO; Registration Date  = 2018-11-27 14:25:56
+Room: ﻿Number = 1; Category = premium; Price = 500; Name = fart; Email = @fart; Arrival date = 2018-11-01; Departure date = 2018-11-02; Breakfast = NO; Clear = YES; Registration Date  = 2018-11-27 15:22:50
+Room: ﻿Number = 1; Category = premium; Price = 500; Name = e; Email = e; Arrival date = 2018-11-01; Departure date = 2018-11-02; Breakfast = NO; Clear = YES; Registration Date  = 2018-11-27 15:47:52Total cost  = 100
+Room: ﻿Number = 1; Category = premium; Price = 500; Name = q; Email = q; Arrival date = 2018-11-01; Departure date = 2018-11-02; Breakfast = NO; Clear = NO; Registration Date  = 2018-11-27 15:51:57Total cost  =  500
+Room: ﻿Number = 1; Category = premium; Price = 500; Name = q; Email = q; Arrival date = 2018-11-01; Departure date = 2018-11-02; Breakfast = NO; Clear = NO; Registration Date  = 2018-11-27 15:57:51Total cost  = 500
+Room: Number = 6; Category = budget; Price = 100; Name = q; Email = q; Arrival date = 2018-11-01; Departure date = 2018-11-03; Breakfast = NO; Clear = NO; Registration Date  = 2018-11-27 15:58:15Total cost  = 200
+Room: ﻿Number = 1; Category = premium; Price = 500; Name = name; Email = email; Arrival date = 2018-11-01; Departure date = 2018-11-03; Breakfast = NO; Clear = YES; Registration Date  = 2018-11-27 16:08:39Total cost  = 1002
+Room: Number = 3; Category = budget; Price = 100; Name = a; Email = a; Arrival date = 2018-11-01; Departure date = 2018-11-11; Breakfast = NO; Clear = YES; Registration Date  = 2018-11-27 16:19:53Total cost  = 1010

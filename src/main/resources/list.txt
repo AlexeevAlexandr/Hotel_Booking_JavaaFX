@@ -1,9 +1,9 @@
-﻿number = 1; premium; price = 500
-number = 2; standard; price = 300
-number = 3; budget; price = 100
-number = 4; premium; price = 500
-number = 5; standard; price = 300
-number = 6; budget; price = 100
-number = 7; premium; price = 500
-number = 8; standard; price = 300
-number = 9; budget; price = 100
+﻿Number = 1; Category = premium; Price = 500
+Number = 2; Category = standard; Price = 300
+Number = 3; Category = budget; Price = 100
+Number = 4; Category = premium; Price = 500
+Number = 5; Category = standard; Price = 300
+Number = 6; Category = budget; Price = 100
+Number = 7; Category = premium; Price = 500
+Number = 8; Category = standard; Price = 300
+Number = 9; Category = budget; Price = 100
