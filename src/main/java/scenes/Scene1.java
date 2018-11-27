@@ -1,5 +1,6 @@
 package scenes;
 
+import costs.Services;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -27,8 +28,12 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 class Scene1 {
-    private int costBreakfast = 2;
-    private int costClearing = 1;
+    //get costs from file cost_additional_services
+    private Services services = new Services();
+    private final int costBreakfast = services.getCostServices("Breakfast");
+    private final int costClearing = services.getCostServices("Clearing");
+
+    //set scene1
     private Text textException = new Text("");
     void scene1(Stage stage) {
         stage.setTitle("Hotel Booking");
@@ -65,7 +70,7 @@ class Scene1 {
             e.printStackTrace();
         }
 
-        //view on window
+        //view data on window
         ListView<String> list = new ListView<>();
         ObservableList<String> items = FXCollections.observableArrayList(arrayList);
         list.setItems(items);
@@ -110,6 +115,7 @@ class Scene1 {
         radioButtons.setSpacing(50);
         radioButtons.setAlignment(Pos.CENTER);
 
+        //adding components to the scene
         root.getChildren().addAll(textFields, dateFields, radioButtons, buttons, rootTextException);
         stage.setScene(scene);
         stage.show();

@@ -1,0 +1,3 @@
+Budget=100
+Standard=200
+Premium=300
