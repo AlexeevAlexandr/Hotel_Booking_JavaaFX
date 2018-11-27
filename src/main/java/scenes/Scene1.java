@@ -1,29 +1,51 @@
 package scenes;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 class Scene1 {
+    private Text textException = new Text("");
     void scene1(Stage stage) {
         stage.setTitle("Hotel Booking");
         VBox root = new VBox();
         root.setSpacing(10);
         Label label = new Label("Scene 1");
         Scene scene = new Scene(root, 800, 600);
+
+        //set textException move animation
+        textException.setTextOrigin(VPos.TOP);
+        textException.setFont(Font.font(20));
+        Pane rootTextException = new Pane(textException);
+        KeyValue initKeyValue = new KeyValue(textException.translateXProperty(), scene.getWidth());
+        KeyFrame initFrame = new KeyFrame(Duration.ZERO, initKeyValue);
+        KeyValue endKeyValue = new KeyValue(textException.translateXProperty(), -1.0 * textException.getLayoutBounds().getWidth());
+        KeyFrame endFrame = new KeyFrame(Duration.seconds(7), endKeyValue);
+        Timeline timeline = new Timeline(initFrame, endFrame);
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
 
         //set style
         BackgroundImage myBI= new BackgroundImage(new Image("8M5A7719 edited.jpg",800,600,false,true),
@@ -65,9 +87,9 @@ class Scene1 {
         dateFields.setAlignment(Pos.CENTER);
         dateFields.setSpacing(100);
         DatePicker datePicker1 = new DatePicker();
-        datePicker1.setPromptText("Enter date from");
+        datePicker1.setPromptText("Enter arrival date");
         DatePicker datePicker2 = new DatePicker();
-        datePicker2.setPromptText("Enter date till");
+        datePicker2.setPromptText("Enter departure date");
         dateFields.getChildren().addAll(datePicker1, datePicker2);
 
         //set buttons
@@ -86,7 +108,7 @@ class Scene1 {
         radioButtons.setSpacing(50);
         radioButtons.setAlignment(Pos.CENTER);
 
-        root.getChildren().addAll(textFields, dateFields, radioButtons, buttons);
+        root.getChildren().addAll(textFields, dateFields, radioButtons, buttons, rootTextException);
         stage.setScene(scene);
         stage.show();
 
@@ -99,28 +121,45 @@ class Scene1 {
         ArrayList<String> arrayList = new ArrayList<>();
         String dateRegistration = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
         buttonSet.setOnAction(a -> {
-            //write to file
-            arrayList.add("Name = " + fieldName.getText() + "; ");
-            arrayList.add("Email = " + fieldEmail.getText() + "; ");
-            arrayList.add("Date from = " + datePicker1.getValue() + "; ");
-            arrayList.add("Date Till = " + datePicker2.getValue() + "; ");
-            arrayList.add("Breakfast = " + (radioBreakfast.isSelected()? "YES" : "NO") + "; ");
-            arrayList.add("Clear = " + (radioClear.isSelected() ? "YES" : "NO") + "; ");
-            arrayList.add("Date registration = " + dateRegistration);
+            //check if data has been entered
+            if (fieldName.getText().length() == 0){ textException.setText("Enter name"); throw new IllegalArgumentException("Name not entered"); }
+            else if (fieldEmail.getText().length() == 0){ textException.setText("Enter email"); throw new IllegalArgumentException("Email not entered"); }
+            else if (datePicker1.getValue() == null){ textException.setText("Enter arrival date"); throw new IllegalArgumentException("Arrival date not entered"); }
+            else if (datePicker2.getValue() == null){ textException.setText("Enter departure date"); throw new IllegalArgumentException("Departure date not entered"); }
+            else if (datePicker1.getValue() != null && datePicker2.getValue() != null) {
+                try {
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    Date date1 = simpleDateFormat.parse(datePicker1.getValue().toString());
+                    Date date2 = simpleDateFormat.parse(datePicker2.getValue().toString());
+                    int diff = (int) TimeUnit.DAYS.convert((date2.getTime() - date1.getTime()), TimeUnit.MILLISECONDS);
 
-            try (FileWriter writer = new FileWriter("src/main/resources/listOrders.txt", true)) {
-                for (String o : arrayList) {
-                    writer.write(o);
+                    //checking if the days number is negative
+                    if (diff <= 0) {
+                        textException.setText("Incorrect date insertion, the number of days can not be negative or 0"); throw new IllegalArgumentException("Incorrect date insertion, the number of days can not be negative or 0");
+                    } else {
+                        arrayList.add("Name = " + fieldName.getText() + "; ");
+                        arrayList.add("Email = " + fieldEmail.getText() + "; ");
+                        arrayList.add("Arrival date = " + datePicker1.getValue() + "; ");
+                        arrayList.add("Departure date = " + datePicker2.getValue() + "; ");
+                        arrayList.add("Breakfast = " + (radioBreakfast.isSelected() ? "YES" : "NO") + "; ");
+                        arrayList.add("Clear = " + (radioClear.isSelected() ? "YES" : "NO") + "; ");
+                        arrayList.add("Registration Date  = " + dateRegistration);
+                    }
+                    try (FileWriter writer = new FileWriter("src/main/resources/listOrders.txt", true)) {
+                        for (String o : arrayList) {
+                            writer.write(o);
+                        }
+                        writer.write("\n");
+                        writer.flush();
+                        Scene2 scene2 = new Scene2();
+                        scene2.setData(arrayList);
+                        scene2.scene2(stage);//switch to scene2
+                    } catch (IOException e) { e.printStackTrace(); }
+                } catch (ParseException e) {
+                    e.printStackTrace();
                 }
-                writer.write("\n");
-                writer.flush();
-            } catch (IOException e) {
-                e.printStackTrace();
             }
-            Scene2 scene2 = new Scene2();
-            scene2.setData(arrayList);
-            scene2.scene2(stage);//switch to scene2
-        });
+            });
     }
 
     private void fieldDataClearing(Button buttonClear, TextField fieldEmail, TextField fieldName, DatePicker datePicker1, DatePicker datePicker2, RadioButton radioBreakfast, RadioButton radioClear) {

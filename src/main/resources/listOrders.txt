@@ -1,24 +1,5 @@
-
-abc;@abc;2018-11-26;2018-11-27;Add breakfast 2$;Add clearing 1$
-abc;@abc;2018-11-26;2018-11-27;Add breakfast 2$;Add clearing 1$
-name;@mane;2018-11-01;2018-11-02;YES;NO
-name;@mane;2018-11-01;2018-11-02;YES;NO
-name;@mane;2018-11-01;2018-11-02;YES;YES
-name;@mane;2018-11-01;2018-11-02;NO;YES
-Name = asd; Email = @a@; Date from = 2018-11-01; Date Till = 2018-11-06; Breakfast = YES; Clear  = YES
-Name = asd; Email = @a@; Date from = 2018-11-01; Date Till = 2018-11-06; Breakfast = NO; Clear  = YES
-Name = asd; Email = @a@; Date from = 2018-11-01; Date Till = 2018-11-06; Breakfast = NO; Clear  = NO
-Name = asd; Email = @a@; Date from = 2018-11-01; Date Till = 2018-11-06; Breakfast = YES; Clear  = NO
-Name = asd; Email = @a@; Date from = 2018-11-01; Date Till = 2018-11-06; Breakfast = NO; Clear  = NO
-Name = my name; Email = my email; Date from = 2018-11-01; Date Till = 2018-11-02; Breakfast = NO; Clear  = YESDate registration = 2018-11-26 22:31:21
-Name = my name; Email = my email; Date from = 2018-11-01; Date Till = 2018-11-02; Breakfast = YES; Clear  = YESDate registration = 2018-11-26 22:31:23
-Name = my name; Email = my email; Date from = 2018-11-01; Date Till = 2018-11-02; Breakfast = YES; Clear  = NODate registration = 2018-11-26 22:31:24
-Name = my name; Email = my email; Date from = 2018-11-01; Date Till = 2018-11-02; Breakfast = NO; Clear  = NODate registration = 2018-11-26 22:31:25
-Name = ; Email = ; Date from = null; Date Till = null; Breakfast = NO; Clear = NO; Date registration = 2018-11-26 22:34:09Name = th; Email = hyhy; Date from = null; Date Till = null; Breakfast = NO; Clear = NO; Date registration = 2018-11-26 22:34:13Name = th; Email = hyhy; Date from = null; Date Till = null; Breakfast = NO; Clear = NO; Date registration = 2018-11-26 22:34:16Name = date; Email = date; Date from = null; Date Till = null; Breakfast = YES; Clear = YES; Date registration = 2018-11-26 22:39:02
-Name = as; Email = as; Date from = null; Date Till = null; Breakfast = YES; Clear = YES; Date registration = 2018-11-26 22:39:57
-Name = fart; Email = @fart; Date from = 2018-11-01; Date Till = 2018-11-02; Breakfast = YES; Clear = YES; Date registration = 2018-11-26 23:05:37
-Name = as; Email = as; Date from = 2018-11-01; Date Till = 2018-11-14; Breakfast = YES; Clear = YES; Date registration = 2018-11-26 23:15:34
-Name = as; Email = as; Date from = 2018-11-01; Date Till = 2018-11-14; Breakfast = YES; Clear = YES; Date registration = 2018-11-26 23:15:34
-Name = as; Email = as; Date from = 2018-11-01; Date Till = 2018-11-01; Breakfast = YES; Clear = YES; Date registration = 2018-11-26 23:16:48
-Name = qw; Email = qw; Date from = 2018-11-01; Date Till = 2018-11-02; Breakfast = YES; Clear = NO; Date registration = 2018-11-26 23:17:56
-Name = name; Email = @name; Date from = 2018-11-01; Date Till = null; Breakfast = NO; Clear = YES; Date registration = 2018-11-26 23:20:03
+Name = sda; Email = ascas; Arrival date = 2018-11-01; Departure date = 2018-11-02; Breakfast = NO; Clear = NO; Registration Date  = 2018-11-27 13:38:35
+Name = dcs; Email = csdcs; Arrival date = 2018-11-01; Departure date = 2018-11-02; Breakfast = NO; Clear = NO; Registration Date  = 2018-11-27 14:15:49
+Name = as; Email = as; Arrival date = 2018-11-01; Departure date = 2018-11-03; Breakfast = YES; Clear = YES; Registration Date  = 2018-11-27 14:16:12
+Name = zsc; Email = sczs; Arrival date = 2018-11-01; Departure date = 2018-11-02; Breakfast = NO; Clear = NO; Registration Date  = 2018-11-27 14:18:03
+Name = awd; Email = adawd; Arrival date = 2018-11-01; Departure date = 2018-11-02; Breakfast = NO; Clear = NO; Registration Date  = 2018-11-27 14:25:56
