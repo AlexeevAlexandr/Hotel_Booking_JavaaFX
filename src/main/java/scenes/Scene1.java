@@ -17,9 +17,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 class Scene1 {
-    //get costs from file cost_additional_services
+    //get rate from file "cost_additional_services"
     private Services services = new Services();
     private final int costBreakfast = services.getCostServices("Breakfast");
     private final int costClearing = services.getCostServices("Clearing");
@@ -62,7 +62,9 @@ class Scene1 {
 
         //reading from file
         ArrayList<String> arrayList = new ArrayList<>();
-        try (Scanner scanner = new Scanner(new FileReader("src/main/resources/list.txt"))) {
+        try (InputStream in = getClass().getResourceAsStream("/list.txt");
+             BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+             Scanner scanner = new Scanner(reader)) {
             while (scanner.hasNext()) {
                 arrayList.add(scanner.nextLine());
             }
@@ -136,6 +138,8 @@ class Scene1 {
             else if (datePicker1.getValue() == null){ textException.setText("Enter arrival date"); throw new IllegalArgumentException("Arrival date not entered"); }
             else if (datePicker2.getValue() == null){ textException.setText("Enter departure date"); throw new IllegalArgumentException("Departure date not entered"); }
             else if (datePicker1.getValue() != null && datePicker2.getValue() != null) {
+
+                //counting days
                 try {
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
                     Date date1 = simpleDateFormat.parse(datePicker1.getValue().toString());
@@ -146,6 +150,8 @@ class Scene1 {
                     if (diff <= 0) {
                         textException.setText("Incorrect date insertion, the number of days can not be negative or 0"); throw new IllegalArgumentException("Incorrect date insertion, the number of days can not be negative or 0");
                     } else {
+
+                        //collect data from fields
                         arrayList.add("Room: " + list.getSelectionModel().getSelectedItem() + "; ");
                         arrayList.add("Name = " + fieldName.getText() + "; ");
                         arrayList.add("Email = " + fieldEmail.getText() + "; ");
@@ -153,10 +159,23 @@ class Scene1 {
                         arrayList.add("Departure date = " + datePicker2.getValue() + "; ");
                         arrayList.add("Breakfast = " + (radioBreakfast.isSelected() ? "YES" : "NO") + "; ");
                         arrayList.add("Clear = " + (radioClear.isSelected() ? "YES" : "NO") + "; ");
-                        arrayList.add("Registration Date  = " + dateRegistration);
+                        arrayList.add("Registration Date  = " + dateRegistration + "; ");
                         arrayList.add("Total cost  = " + getTotalCost(list.getSelectionModel().getSelectedItem(), radioBreakfast, radioClear, diff) + "$");
                     }
-                    try (FileWriter writer = new FileWriter("src/main/resources/listOrders.txt", true)) {
+
+                    //if the file does not exist, it creates a new one
+                    if (!new File("/home/alexandr/IdeaProjects/Hotel_Booking_JavaaFX/listOrders.txt").exists()){
+                        try {
+                            Files.createFile(Paths.get("/home/alexandr/IdeaProjects/Hotel_Booking_JavaaFX/listOrders.txt"));
+                        } catch (IOException e) {
+                            textException.setText("Can't create new file");
+                            e.printStackTrace();
+                        }
+                    }
+
+                    //write to file
+                    try (FileWriter stream = new FileWriter("/home/alexandr/IdeaProjects/Hotel_Booking_JavaaFX/listOrders.txt",true);
+                         BufferedWriter writer = new BufferedWriter(stream)) {
                         for (String o : arrayList) {
                             writer.write(o);
                         }
@@ -165,7 +184,9 @@ class Scene1 {
                         Scene2 scene2 = new Scene2();
                         scene2.setData(arrayList);
                         scene2.scene2(stage);//switch to scene2
-                    } catch (IOException e) { e.printStackTrace(); }
+                    } catch (IOException e) {
+                        textException.setText("File not found");
+                        e.printStackTrace(); }
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
