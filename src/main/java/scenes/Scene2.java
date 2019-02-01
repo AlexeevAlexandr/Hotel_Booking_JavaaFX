@@ -5,8 +5,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.layout.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -21,10 +21,7 @@ class Scene2 {
         Scene scene2 = new Scene(root, 800, 600);
 
         //set style
-        BackgroundImage myBI= new BackgroundImage(new Image("8M5A7719 edited.jpg",800,600,false,true),
-                BackgroundRepeat.ROUND, BackgroundRepeat.ROUND, BackgroundPosition.CENTER,
-                BackgroundSize.DEFAULT);
-        root.setBackground(new Background(myBI));
+        Scene1.setStyle(root);
 
         //set buttons switcher scenes
         HBox buttonsScene = new HBox();

@@ -55,10 +55,7 @@ class Scene1 {
         timeline.play();
 
         //set style
-        BackgroundImage myBI= new BackgroundImage(new Image("8M5A7719 edited.jpg",800,600,false,true),
-                BackgroundRepeat.ROUND, BackgroundRepeat.ROUND, BackgroundPosition.CENTER,
-                BackgroundSize.DEFAULT);
-        root.setBackground(new Background(myBI));
+        setStyle(root);
 
         //reading from file
         ArrayList<String> arrayList = new ArrayList<>();
@@ -125,6 +122,13 @@ class Scene1 {
         //event handling
         fieldsDataClearing(buttonClear, list, fieldEmail, fieldName, datePicker1, datePicker2, radioBreakfast, radioClear);//field data clearing
         writeDataToListOrders(stage, list, buttonSet, fieldName, fieldEmail, datePicker1, datePicker2, radioBreakfast, radioClear);//field data setting
+    }
+
+    static void setStyle(VBox root) {
+        BackgroundImage myBI= new BackgroundImage(new Image("8M5A7719 edited.jpg",800,600,false,true),
+                BackgroundRepeat.ROUND, BackgroundRepeat.ROUND, BackgroundPosition.CENTER,
+                BackgroundSize.DEFAULT);
+        root.setBackground(new Background(myBI));
     }
 
     private void writeDataToListOrders(Stage stage, ListView<String> list, Button buttonSet, TextField fieldName, TextField fieldEmail, DatePicker datePicker1, DatePicker datePicker2, RadioButton radioBreakfast, RadioButton radioClear) {
